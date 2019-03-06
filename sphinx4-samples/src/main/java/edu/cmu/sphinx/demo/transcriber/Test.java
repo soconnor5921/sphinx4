@@ -26,11 +26,17 @@ public class Test
         SpeechResult result;
 
         while ((result = recognizer.getResult()) != null) {
-            System.out.format("Hypothesis: %s\n", result.getHypothesis());
-            if(result.getHypothesis().contains("zero"))
+            String hypothesis = result.getHypothesis();
+            System.out.format("Hypothesis: %s\n", hypothesis);
+            if(hypothesis.contains("zero"))
             {
                 System.out.println("It contains the word zero");
             }
+            while(hypothesis.contains("zero"))
+            {
+                hypothesis = hypothesis.substring(0, hypothesis.indexOf("zero")) + hypothesis.substring(hypothesis.indexOf("zero") + 4);
+            }
+            System.out.println(hypothesis);
         }
         recognizer.stopRecognition();
     }
