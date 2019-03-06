@@ -34,10 +34,15 @@ public class Test
             }
             while(hypothesis.contains("zero"))
             {
-                hypothesis = hypothesis.substring(0, hypothesis.indexOf("zero")) + hypothesis.substring(hypothesis.indexOf("zero") + 4);
+                hypothesis = hypothesis.substring(0, hypothesis.indexOf("zero")) + "REDACTED" + hypothesis.substring(hypothesis.indexOf("zero") + 4);
             }
             System.out.println(hypothesis);
         }
         recognizer.stopRecognition();
+    }
+
+    public static void removeWords(String word)
+    {
+        
     }
 }
