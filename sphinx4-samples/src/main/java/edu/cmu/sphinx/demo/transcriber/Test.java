@@ -3,14 +3,16 @@ package edu.cmu.sphinx.demo.transcriber;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.SpeechResult;
 import edu.cmu.sphinx.api.StreamSpeechRecognizer;
+import edu.cmu.sphinx.result.WordResult;
 
 public class Test
 {
-
     public static void main(String[] args) throws Exception {
 
         Configuration configuration = new Configuration();
@@ -30,6 +32,12 @@ public class Test
             System.out.format("Hypothesis: %s\n", hypothesis);
 
             removeWords("zero", result);
+
+            //Possibly remove this stuff or look into it further
+            for (WordResult r : result.getWords()) {
+                System.out.println(r);
+            }
+            System.out.println(result.getWords());
         }
         recognizer.stopRecognition();
     }
