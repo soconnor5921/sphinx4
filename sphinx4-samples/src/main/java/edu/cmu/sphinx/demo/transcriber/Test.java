@@ -37,30 +37,17 @@ public class Test
     public static void removeWords(String word, SpeechResult result)
     {
         String hypothesis = result.getHypothesis();
-        String newHypothesis;
-       /** if(hypothesis.contains(word))
-        {
-            System.out.println("The hypothesis contains the word " + word + ".");
-        }
-        else
-        {
-            System.out.println("The hypothesis does not contain the word.");
-        }*/
-
         if(hypothesis.contains(word))
         {
-            for(int i = 0; i < hypothesis.length() - word.length(); i++)
+            while(hypothesis.contains(word))
             {
-                if(hypothesis.substring(i, i + word.length()-1).equals(word))
-                {
-                    newHypothesis = hypothesis.substring(0, i) + "REDACTED" + hypothesis.substring(i + word.length());
-                }
+                hypothesis = hypothesis.substring(0, hypothesis.indexOf(word)) + "REDACTED" + hypothesis.substring(hypothesis.indexOf(word) + word.length());
             }
-
+            System.out.println(hypothesis);
         }
         else
         {
-            System.out.println("The hypothesis does not contain the word.");
+            System.out.println("The hypothesis does not contain the word " + word);
         }
     }
 }
