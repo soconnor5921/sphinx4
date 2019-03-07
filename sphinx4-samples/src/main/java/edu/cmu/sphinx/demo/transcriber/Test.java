@@ -28,21 +28,39 @@ public class Test
         while ((result = recognizer.getResult()) != null) {
             String hypothesis = result.getHypothesis();
             System.out.format("Hypothesis: %s\n", hypothesis);
-            if(hypothesis.contains("zero"))
-            {
-                System.out.println("It contains the word zero");
-            }
-            while(hypothesis.contains("zero"))
-            {
-                hypothesis = hypothesis.substring(0, hypothesis.indexOf("zero")) + "REDACTED" + hypothesis.substring(hypothesis.indexOf("zero") + 4);
-            }
-            System.out.println(hypothesis);
+
+            removeWords("zero", result);
         }
         recognizer.stopRecognition();
     }
 
-    public static void removeWords(String word)
+    public static void removeWords(String word, SpeechResult result)
     {
-        
+        String hypothesis = result.getHypothesis();
+        String newHypothesis;
+       /** if(hypothesis.contains(word))
+        {
+            System.out.println("The hypothesis contains the word " + word + ".");
+        }
+        else
+        {
+            System.out.println("The hypothesis does not contain the word.");
+        }*/
+
+        if(hypothesis.contains(word))
+        {
+            for(int i = 0; i < hypothesis.length() - word.length(); i++)
+            {
+                if(hypothesis.substring(i, i + word.length()-1).equals(word))
+                {
+                    newHypothesis = hypothesis.substring(0, i) + "REDACTED" + hypothesis.substring(i + word.length());
+                }
+            }
+
+        }
+        else
+        {
+            System.out.println("The hypothesis does not contain the word.");
+        }
     }
 }
